@@ -1,11 +1,11 @@
-package cn.mirror6.abStatic;
+package cn.mirror6.abstatic;
 
 /**
  * @author mirror6
- * @description 单例模式 懒汉式 demo
+ * @description 单例模式 懒汉式 demo 线程不安全
  * @date 2019/6/26 16:21
  */
-class SingletonOfLazy {
+public class SingletonOfLazy {
 
     /**
      * 声明一个Singleton对象
@@ -23,9 +23,8 @@ class SingletonOfLazy {
     /**
      * 对外部开放，返回单例对象
      */
-    static SingletonOfLazy getSingleton() {
-        if (null == singleton)
-        {
+    public static SingletonOfLazy getSingleton() {
+        if (null == singleton) {
             singleton = new SingletonOfLazy();
         }
         return singleton;

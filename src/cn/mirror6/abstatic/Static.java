@@ -1,4 +1,4 @@
-package cn.mirror6.abStatic;
+package cn.mirror6.abstatic;
 
 /**
  * @author mirror6

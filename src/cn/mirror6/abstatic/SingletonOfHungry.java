@@ -1,18 +1,18 @@
-package cn.mirror6.abStatic;
+package cn.mirror6.abstatic;
 
 /**
  * @author mirror6
- * @description 单例模式 饿汉式 demo
+ * @description 单例模式 饿汉式 demo 线程安全
  * @date 2019/6/26 16:37
  */
-class SingletonOfHungry {
+public class SingletonOfHungry {
 
     private static SingletonOfHungry singletonOfHungry = new SingletonOfHungry();
 
     private SingletonOfHungry() {
     }
 
-    static SingletonOfHungry getSingleton() {
+    public static SingletonOfHungry getSingleton() {
         return singletonOfHungry;
     }
 }

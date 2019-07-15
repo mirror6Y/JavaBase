@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @auther mirror6
+ * @author mirror6
  * @date 2019/6/30 16:24
  */
 public class Compare {
