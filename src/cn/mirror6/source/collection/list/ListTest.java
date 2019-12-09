@@ -14,7 +14,6 @@ public class ListTest {
     public static void main(String[] args) {
 
         List list = new ArrayList();
-//        list.trm
 
         List list2 = new LinkedList();
 

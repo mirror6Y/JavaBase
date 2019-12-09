@@ -15,7 +15,7 @@ public class TestForList {
 
     private static void add() {
 
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         list.add("a");
         list.add("b");
         list.add("d");
@@ -24,7 +24,7 @@ public class TestForList {
         System.out.println("第二次次执行:" + list);
         list.set(2, "3");
         System.out.println("第三次次执行:" + list);
-        List<String> strings = new ArrayList<>();
+        List<String> strings = new ArrayList<String>();
         strings.addAll(list);
         System.out.println("第一次执行addAll:" + strings);
         strings.addAll(1, Collections.singleton("1"));
@@ -32,7 +32,8 @@ public class TestForList {
     }
 
     private static void remove(List list) {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++)
+        {
             list.remove(i);
             System.out.println("i:" + i + ",list:" + list);
         }
@@ -41,7 +42,8 @@ public class TestForList {
     private static void remove2(List list) {
         //list转成迭代器
         Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             Integer integer = iterator.next();
             iterator.remove();
             System.out.println("list:" + list);
