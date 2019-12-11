@@ -105,6 +105,7 @@ public class LinkedList<E>
 
     /**
      * Links e as first element.
+     * e作为链表的第一个元素
      */
     private void linkFirst(E e) {
         final Node<E> f = first;
@@ -121,31 +122,35 @@ public class LinkedList<E>
 
     /**
      * Links e as last element.
+     * e作为链表的最后一个元素
      */
-    void linkLast(E e) {
-        final java.util.LinkedList.Node<E> l = last;
-        final java.util.LinkedList.Node<E> newNode = new java.util.LinkedList.Node<>(l, e, null);
+    private void linkLast(E e) {
+        final Node<E> l = last;
+        final Node<E> newNode = new Node<>(l, e, null);
         last = newNode;
-        if (l == null)
+        if (l == null) {
             first = newNode;
-        else
+        } else {
             l.next = newNode;
+        }
         size++;
         modCount++;
     }
 
     /**
      * Inserts element e before non-null Node succ.
+     * 在非空节点之前插入节点succ
      */
-    void linkBefore(E e, java.util.LinkedList.Node<E> succ) {
+    void linkBefore(E e, Node<E> succ) {
         // assert succ != null;
-        final java.util.LinkedList.Node<E> pred = succ.prev;
-        final java.util.LinkedList.Node<E> newNode = new java.util.LinkedList.Node<>(pred, e, succ);
+        final Node<E> pred = succ.prev;
+        final Node<E> newNode = new Node<>(pred, e, succ);
         succ.prev = newNode;
-        if (pred == null)
+        if (pred == null) {
             first = newNode;
-        else
+        } else {
             pred.next = newNode;
+        }
         size++;
         modCount++;
     }
