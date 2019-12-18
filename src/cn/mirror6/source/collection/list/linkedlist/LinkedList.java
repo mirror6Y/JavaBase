@@ -2,7 +2,7 @@ package cn.mirror6.source.collection.list.linkedlist;
 
 /**
  * @author mirror6
- * @description
+ * @description linkedList源码分析
  * @createTime 2019/12/11 16:21
  */
 
@@ -14,6 +14,9 @@ public class LinkedList<E>
         extends AbstractSequentialList<E>
         implements List<E>, Deque<E>, Cloneable, java.io.Serializable {
 
+    /**
+     * list元素个数
+     */
     transient int size = 0;
 
     /**
@@ -33,7 +36,6 @@ public class LinkedList<E>
     transient Node<E> last;
 
     /**
-     * Constructs an empty list.
      * 无参构造
      */
     public LinkedList() {
@@ -1036,7 +1038,7 @@ public class LinkedList<E>
      * Returns a shallow copy of this {@code LinkedList}. (The elements
      * themselves are not cloned.)
      *
-     * @return a shallow copy of this {@code LinkedList} instance
+     * @return 返回一个浅拷贝实例
      */
     @Override
     public Object clone() {
