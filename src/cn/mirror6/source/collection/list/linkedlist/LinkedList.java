@@ -42,12 +42,10 @@ public class LinkedList<E>
     }
 
     /**
-     * Constructs a list containing the elements of the specified
-     * collection, in the order they are returned by the collection's
-     * iterator.
+     * 构造一个包含特定集合的list,其元素按照迭代器的顺序返回。
      *
-     * @param c the collection whose elements are to be placed into this list
-     * @throws NullPointerException if the specified collection is null
+     * @param c 集合的元素都要放到list中
+     * @throws NullPointerException 如果这个集合为空
      */
     public LinkedList(Collection<? extends E> c) {
         this();
@@ -55,8 +53,7 @@ public class LinkedList<E>
     }
 
     /**
-     * Links e as first element.
-     * e作为链表的第一个元素
+     * 在表头添加数据
      */
     private void linkFirst(E e) {
         final Node<E> f = first;
@@ -72,8 +69,7 @@ public class LinkedList<E>
     }
 
     /**
-     * Links e as last element.
-     * e作为链表的最后一个元素
+     * 在表尾添加数据
      */
     private void linkLast(E e) {
         final Node<E> l = last;
@@ -108,6 +104,7 @@ public class LinkedList<E>
 
     /**
      * Unlinks non-null first node f.
+     * 删除非空头结点
      */
     private E unlinkFirst(Node<E> f) {
         // assert f == first && f != null;
@@ -128,6 +125,7 @@ public class LinkedList<E>
 
     /**
      * Unlinks non-null last node l.
+     * 删除非空尾节点
      */
     private E unlinkLast(Node<E> l) {
         // assert l == last && l != null;
@@ -148,6 +146,7 @@ public class LinkedList<E>
 
     /**
      * Unlinks non-null node x.
+     * 删除非空元素
      */
     E unlink(Node<E> x) {
         // assert x != null;
