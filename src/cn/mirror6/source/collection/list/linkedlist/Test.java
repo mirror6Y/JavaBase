@@ -21,17 +21,18 @@ public class Test {
         list.add("3");
         System.out.println(list.toString());
 //        list.remove();
-        Object s=((LinkedList) list).remove();
+//        Object s=((LinkedList) list).remove();
+        boolean aBoolean=list.remove("4");
         System.out.println(list.toString());
-        System.out.println(s);
+//        System.out.println(s);
 //        list.remove
 
-        List list1=new ArrayList();
-        list1.add("a");
-        list1.add("b");
-        list1.add("c");
-        list1.add("d");
-        System.out.println(list1.toString());
+//        List list1=new ArrayList();
+//        list1.add("a");
+//        list1.add("b");
+//        list1.add("c");
+//        list1.add("d");
+//        System.out.println(list1.toString());
 //        ((ArrayList)list1).remove();
     }
 }

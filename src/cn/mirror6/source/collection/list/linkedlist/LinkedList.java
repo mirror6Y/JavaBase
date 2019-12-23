@@ -165,22 +165,33 @@ public class LinkedList<E>
         final E element = x.item;
         final Node<E> next = x.next;
         final Node<E> prev = x.prev;
-
+        //前驱节点为空，删除的是链表头结点
         if (prev == null) {
+            //该节点的后继节点便成为新的链表头结点
             first = next;
         } else {
+            //前驱节点不为空，删除的是链表之间元素
+            //将被删除节点的后继节点与其前驱节点的后继指针相关联
             prev.next = next;
+            //将被删除节点的前驱节点置空
             x.prev = null;
         }
+        //被删除节点的后继节点还未处理
 
+        //后继节点为空，删除的是链表尾结点
         if (next == null) {
+            //该节点的前驱节点便成为新的链表尾结点
             last = prev;
         } else {
+            //该节点的后继节点不为空
+            //将该节点的后继节点的前驱指针与前驱节点就行关联
             next.prev = prev;
+            //置空后继指针
             x.next = null;
         }
-
+        //将被删除元素置空
         x.item = null;
+        //更新计数
         size--;
         modCount++;
         return element;
@@ -301,22 +312,18 @@ public class LinkedList<E>
     }
 
     /**
-     * Removes the first occurrence of the specified element from this list,
-     * if it is present.  If this list does not contain the element, it is
-     * unchanged.  More formally, removes the element with the lowest index
-     * {@code i} such that
-     * <tt>(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))</tt>
-     * (if such an element exists).  Returns {@code true} if this list
-     * contained the specified element (or equivalently, if this list
-     * changed as a result of the call).
+     * 删除链表中第一次出现的元素,如果该元素存在。如果该元素不存在，那么链表没有变化
      *
-     * @param o element to be removed from this list, if present
-     * @return {@code true} if this list contained the specified element
+     * @param o 要被删除的链表元素。
+     * @return {@code true} 删除成功返回真，否则返回假
      */
     @Override
     public boolean remove(Object o) {
+        //如果元素为空
         if (o == null) {
+            //遍历链表
             for (Node<E> x = first; x != null; x = x.next) {
+                //判断元素是否为空
                 if (x.item == null) {
                     unlink(x);
                     return true;
@@ -415,8 +422,7 @@ public class LinkedList<E>
     }
 
     /**
-     * Removes all of the elements from this list.
-     * The list will be empty after this call returns.
+     * 清空链表的全部元素
      */
     @Override
     public void clear() {
@@ -453,20 +459,23 @@ public class LinkedList<E>
     }
 
     /**
-     * Replaces the element at the specified position in this list with the
-     * specified element.
+     * 替换指定位置的元素
      *
-     * @param index   index of the element to replace
-     * @param element element to be stored at the specified position
-     * @return the element previously at the specified position
-     * @throws IndexOutOfBoundsException {@inheritDoc}
+     * @param index   索引
+     * @param element 要替换的元素
+     * @return 被替换的元素
+     * @throws IndexOutOfBoundsException 索引越界
      */
     @Override
     public E set(int index, E element) {
+        //校验是否越界
         checkElementIndex(index);
+        //获取索引对应位置的节点信息
         Node<E> x = node(index);
+        //替换元素
         E oldVal = x.item;
         x.item = element;
+        //返回被替换的旧元素
         return oldVal;
     }
 
@@ -491,16 +500,15 @@ public class LinkedList<E>
     }
 
     /**
-     * Removes the element at the specified position in this list.  Shifts any
-     * subsequent elements to the left (subtracts one from their indices).
-     * Returns the element that was removed from the list.
+     * 删除并返回指定位置的元素
      *
-     * @param index the index of the element to be removed
-     * @return the element previously at the specified position
-     * @throws IndexOutOfBoundsException {@inheritDoc}
+     * @param index 索引位置
+     * @return 被删除的元素
+     * @throws IndexOutOfBoundsException 索引越界
      */
     @Override
     public E remove(int index) {
+        //是否越界
         checkElementIndex(index);
         return unlink(node(index));
     }
