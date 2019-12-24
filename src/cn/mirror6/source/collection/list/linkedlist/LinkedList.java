@@ -426,18 +426,20 @@ public class LinkedList<E>
      */
     @Override
     public void clear() {
-        // Clearing all of the links between nodes is "unnecessary", but:
-        // - helps a generational GC if the discarded nodes inhabit
-        //   more than one generation
-        // - is sure to free memory even if there is a reachable Iterator
+        //遍历链表
         for (Node<E> x = first; x != null; ) {
+            //先获取x的后继节点,便于清空x后进行操作
             Node<E> next = x.next;
+            //将x节点置空
             x.item = null;
             x.next = null;
             x.prev = null;
+            //指向x的后继节点,继续遍历
             x = next;
         }
+        //清空链表之后,头结点,尾节点清空
         first = last = null;
+        //更新计数
         size = 0;
         modCount++;
     }
@@ -555,18 +557,23 @@ public class LinkedList<E>
     }
 
     /**
-     * 在特定位置添加节点
+     * 返回索引位置的节点
      */
     Node<E> node(int index) {
         // assert isElementIndex(index);
         //>>位运算符,右移1位,即除2
+        //如果索引小于链表容量的一半
         if (index < (size >> 1)) {
+            //从表头开始遍历
             Node<E> x = first;
             for (int i = 0; i < index; i++) {
                 x = x.next;
             }
             return x;
-        } else {
+        }
+        //如果索引不小于链表容量的一半
+        else {
+            //从表尾开始遍历
             Node<E> x = last;
             for (int i = size - 1; i > index; i--) {
                 x = x.prev;
