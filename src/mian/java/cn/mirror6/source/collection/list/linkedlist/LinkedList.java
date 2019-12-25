@@ -1,11 +1,5 @@
 package cn.mirror6.source.collection.list.linkedlist;
 
-/**
- * @author mirror6
- * @description linkedList源码分析
- * @createTime 2019/12/11 16:21
- */
-
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -653,7 +647,7 @@ public class LinkedList<E>
     /**
      * Retrieves, but does not remove, the head (first element) of this list.
      *
-     * @return the head of this list, or {@code null} if this list is empty
+     * @return the head of this list, o0000000000000r {@code null} if this list is empty
      * @since 1.5
      */
     @Override
@@ -891,7 +885,7 @@ public class LinkedList<E>
     @Override
     public ListIterator<E> listIterator(int index) {
         checkPositionIndex(index);
-        return new LinkedList.ListItr(index);
+        return new ListItr(index);
     }
 
     private class ListItr implements ListIterator<E> {
@@ -1032,14 +1026,14 @@ public class LinkedList<E>
      */
     @Override
     public Iterator<E> descendingIterator() {
-        return new LinkedList.DescendingIterator();
+        return new DescendingIterator();
     }
 
     /**
      * Adapter to provide descending iterators via ListItr.previous
      */
     private class DescendingIterator implements Iterator<E> {
-        private final LinkedList.ListItr itr = new LinkedList.ListItr(size());
+        private final ListItr itr = new ListItr(size());
 
         @Override
         public boolean hasNext() {
@@ -1082,7 +1076,7 @@ public class LinkedList<E>
         clone.modCount = 0;
 
         // Initialize clone with our elements
-        for (LinkedList.Node<E> x = first; x != null; x = x.next) {
+        for (Node<E> x = first; x != null; x = x.next) {
             clone.add(x.item);
         }
 
