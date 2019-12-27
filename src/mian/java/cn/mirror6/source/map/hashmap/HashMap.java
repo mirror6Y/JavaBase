@@ -311,10 +311,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             }
             if (o instanceof Map.Entry) {
                 Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-                if (Objects.equals(key, e.getKey()) &&
-                        Objects.equals(value, e.getValue())) {
-                    return true;
-                }
+                return Objects.equals(key, e.getKey()) && Objects.equals(value, e.getValue());
             }
             return false;
         }
@@ -354,8 +351,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             Type t;
             ParameterizedType p;
             // bypass checks
-            if ((c = x.getClass()) == String.class)
-            {
+            if ((c = x.getClass()) == String.class) {
                 return c;
             }
             if ((ts = c.getGenericInterfaces()) != null) {
@@ -364,8 +360,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                             ((p = (ParameterizedType) t).getRawType() ==
                                     Comparable.class) &&
                             (as = p.getActualTypeArguments()) != null &&
-                            as.length == 1 && as[0] == c)
-                    {
+                            as.length == 1 && as[0] == c) {
                         return c;
                     }
                 }
@@ -853,7 +848,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * @return the node, or null if none
      */
     final Node<K, V> removeNode(int hash, Object key, Object value,
-                                                  boolean matchValue, boolean movable) {
+                                boolean matchValue, boolean movable) {
         Node<K, V>[] tab;
         Node<K, V> p;
         int n, index;
@@ -1373,9 +1368,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             n = (tab = resize()).length;
         }
         if ((first = tab[i = (n - 1) & hash]) != null) {
-            if (first instanceof TreeNode)
+            if (first instanceof TreeNode) {
                 old = (t = (TreeNode<K, V>) first).getTreeNode(hash, key);
-            else {
+            } else {
                 Node<K, V> e = first;
                 K k;
                 do {
@@ -1650,14 +1645,14 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     // spliterators
 
     static class HashMapSpliterator<K, V> {
-        final java.util.HashMap<K, V> map;
+        final HashMap<K, V> map;
         Node<K, V> current;          // current node
         int index;                  // current index, modified on advance/split
         int fence;                  // one past last index
         int est;                    // size estimate
         int expectedModCount;       // for comodification checks
 
-        HashMapSpliterator(java.util.HashMap<K, V> m, int origin,
+        HashMapSpliterator(HashMap<K, V> m, int origin,
                            int fence, int est,
                            int expectedModCount) {
             this.map = m;
@@ -1670,7 +1665,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         final int getFence() { // initialize fence and size on first use
             int hi;
             if ((hi = fence) < 0) {
-                java.util.HashMap<K, V> m = map;
+                HashMap<K, V> m = map;
                 est = m.size;
                 expectedModCount = m.modCount;
                 Node<K, V>[] tab = m.table;
@@ -1688,11 +1683,12 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final class KeySpliterator<K, V>
             extends HashMapSpliterator<K, V>
             implements Spliterator<K> {
-        KeySpliterator(java.util.HashMap<K, V> m, int origin, int fence, int est,
+        KeySpliterator(HashMap<K, V> m, int origin, int fence, int est,
                        int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
         }
 
+        @Override
         public KeySpliterator<K, V> trySplit() {
             int hi = getFence(), lo = index, mid = (lo + hi) >>> 1;
             return (lo >= mid || current != null) ? null :
@@ -1767,7 +1763,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final class ValueSpliterator<K, V>
             extends HashMapSpliterator<K, V>
             implements Spliterator<V> {
-        ValueSpliterator(java.util.HashMap<K, V> m, int origin, int fence, int est,
+        ValueSpliterator(HashMap<K, V> m, int origin, int fence, int est,
                          int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
         }
@@ -1846,7 +1842,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final class EntrySpliterator<K, V>
             extends HashMapSpliterator<K, V>
             implements Spliterator<Map.Entry<K, V>> {
-        EntrySpliterator(java.util.HashMap<K, V> m, int origin, int fence, int est,
+        EntrySpliterator(HashMap<K, V> m, int origin, int fence, int est,
                          int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
         }
@@ -1865,7 +1861,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             if (action == null) {
                 throw new NullPointerException();
             }
-            java.util.HashMap<K, V> m = map;
+            HashMap<K, V> m = map;
             Node<K, V>[] tab = m.table;
             if ((hi = fence) < 0) {
                 mc = expectedModCount = m.modCount;
@@ -1951,7 +1947,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     // For treeifyBin
-   TreeNode<K, V> replacementTreeNode(Node<K, V> p, Node<K, V> next) {
+    TreeNode<K, V> replacementTreeNode(Node<K, V> p, Node<K, V> next) {
         return new TreeNode<>(p.hash, p.key, p.value, next);
     }
 
@@ -2158,7 +2154,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
          * Returns a list of non-TreeNodes replacing those linked from
          * this node.
          */
-        final Node<K, V> untreeify(java.util.HashMap<K, V> map) {
+        final Node<K, V> untreeify(HashMap<K, V> map) {
             Node<K, V> hd = null, tl = null;
             for (Node<K, V> q = this; q != null; q = q.next) {
                 Node<K, V> p = map.replacementNode(q, null);
@@ -2175,8 +2171,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         /**
          * Tree version of putVal.
          */
-        final TreeNode<K, V> putTreeVal(java.util.HashMap<K, V> map, Node<K, V>[] tab,
-                                                          int h, K k, V v) {
+        final TreeNode<K, V> putTreeVal(HashMap<K, V> map, Node<K, V>[] tab,
+                                        int h, K k, V v) {
             Class<?> kc = null;
             boolean searched = false;
             TreeNode<K, V> root = (parent != null) ? root() : this;
@@ -2235,7 +2231,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
          * the bin is converted back to a plain bin. (The test triggers
          * somewhere between 2 and 6 nodes, depending on tree structure).
          */
-        final void removeTreeNode(java.util.HashMap<K, V> map, Node<K, V>[] tab,
+        final void removeTreeNode(HashMap<K, V> map, Node<K, V>[] tab,
                                   boolean movable) {
             int n;
             if (tab == null || (n = tab.length) == 0) {
@@ -2298,8 +2294,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 if ((p.right = sr) != null) {
                     sr.parent = p;
                 }
-                if ((s.left = pl) != null)
+                if ((s.left = pl) != null) {
                     pl.parent = s;
+                }
                 if ((s.parent = pp) == null) {
                     root = s;
                 } else if (p == pp.left) {
@@ -2359,7 +2356,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
          * @param index the index of the table being split
          * @param bit   the bit of hash to split on
          */
-        final void split(java.util.HashMap<K, V> map, Node<K, V>[] tab, int index, int bit) {
+        final void split(HashMap<K, V> map, Node<K, V>[] tab, int index, int bit) {
             TreeNode<K, V> b = this;
             // Relink into lo and hi lists, preserving order
             TreeNode<K, V> loHead = null, loTail = null;
@@ -2414,7 +2411,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         // Red-black tree methods, all adapted from CLR
 
         static <K, V> TreeNode<K, V> rotateLeft(TreeNode<K, V> root,
-                                                                  TreeNode<K, V> p) {
+                                                TreeNode<K, V> p) {
             TreeNode<K, V> r, pp, rl;
             if (p != null && (r = p.right) != null) {
                 if ((rl = p.right = r.left) != null) {
@@ -2434,7 +2431,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
 
         static <K, V> TreeNode<K, V> rotateRight(TreeNode<K, V> root,
-                                                                   TreeNode<K, V> p) {
+                                                 TreeNode<K, V> p) {
             TreeNode<K, V> l, pp, lr;
             if (p != null && (l = p.left) != null) {
                 if ((lr = p.left = l.right) != null) {
@@ -2454,7 +2451,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
 
         static <K, V> TreeNode<K, V> balanceInsertion(TreeNode<K, V> root,
-                                                                        TreeNode<K, V> x) {
+                                                      TreeNode<K, V> x) {
             x.red = true;
             for (TreeNode<K, V> xp, xpp, xppl, xppr; ; ) {
                 if ((xp = x.parent) == null) {
@@ -2506,7 +2503,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
 
         static <K, V> TreeNode<K, V> balanceDeletion(TreeNode<K, V> root,
-                                                                       TreeNode<K, V> x) {
+                                                     TreeNode<K, V> x) {
             for (TreeNode<K, V> xp, xpl, xpr; ; ) {
                 if (x == null || x == root) {
                     return root;
