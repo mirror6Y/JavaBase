@@ -208,8 +208,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * 默认的初始容量-必须是2的幂数
+     * aka 16
      */
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
     /**
      * 最大容量
@@ -987,8 +988,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
         @Override
         public final Spliterator<K> spliterator() {
-            return new KeySpliterator<>(this, 0, -1, 0, 0);
+            return new KeySpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
+
 
         @Override
         public final void forEach(Consumer<? super K> action) {
@@ -998,8 +1000,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             }
             if (size > 0 && (tab = table) != null) {
                 int mc = modCount;
-                for (int i = 0; i < tab.length; ++i) {
-                    for (Node<K, V> e = tab[i]; e != null; e = e.next) {
+                for (Node<K, V> kvNode : tab) {
+                    for (Node<K, V> e = kvNode; e != null; e = e.next) {
                         action.accept(e.key);
                     }
                 }
@@ -1029,7 +1031,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     public Collection<V> values() {
         Collection<V> vs = values;
         if (vs == null) {
-            vs = Values();
+            vs = new Values();
             values = vs;
         }
         return vs;
@@ -1058,8 +1060,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
         @Override
         public final Spliterator<V> spliterator() {
-            return new ValueSpliterator<>(this, 0, -1, 0, 0);
+            return new ValueSpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
+
 
         @Override
         public final void forEach(Consumer<? super V> action) {
@@ -1142,8 +1145,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
 
         @Override
-        public final Spliterator<Map.Entry<K, V>> spliterator() {
-            return new EntrySpliterator<>(this, 0, -1, 0, 0);
+        public final Spliterator<Map.Entry<K,V>> spliterator() {
+            return new EntrySpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
 
         @Override
@@ -2098,9 +2101,10 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             int d;
             if (a == null || b == null ||
                     (d = a.getClass().getName().
-                            compareTo(b.getClass().getName())) == 0)
+                            compareTo(b.getClass().getName())) == 0) {
                 d = (System.identityHashCode(a) <= System.identityHashCode(b) ?
                         -1 : 1);
+            }
             return d;
         }
 
@@ -2109,7 +2113,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
          */
         final void treeify(Node<K, V>[] tab) {
             TreeNode<K, V> root = null;
-            for (jTreeNode<K, V> x = this, next; x != null; x = next) {
+            for (TreeNode<K, V> x = this, next; x != null; x = next) {
                 next = (TreeNode<K, V>) x.next;
                 x.left = x.right = null;
                 if (root == null) {
