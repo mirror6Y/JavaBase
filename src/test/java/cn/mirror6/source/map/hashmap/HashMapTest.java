@@ -28,10 +28,15 @@ public class HashMapTest {
     @Test
     public void test(){
         Map<String, String> hashMap= new HashMap<>();
-        hashMap.put("a","a");
-        hashMap.put("b","b");
-        hashMap.put("c","c");
-        hashMap.put("d","d");
+        hashMap.put("1","a");
+        hashMap.put("2","b");
+        hashMap.put("3","c");
+        hashMap.put("4","d");
         System.out.println(hashMap.toString());
+
+        System.out.println(hashMap.get("1").hashCode());
+        System.out.println(hashMap.get("2").hashCode());
+        System.out.println(hashMap.get("3").hashCode());
+        System.out.println(hashMap.get("4").hashCode());
     }
 }

@@ -1,6 +1,13 @@
 package cn.mirror6.source.collection.list;
 
-import java.util.*;
+
+import cn.mirror6.source.collection.list.linkedlist.LinkedList;
+import cn.mirror6.source.map.hashmap.HashMap;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * @author mirror6
