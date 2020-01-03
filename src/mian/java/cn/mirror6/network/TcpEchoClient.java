@@ -15,15 +15,17 @@ public class TcpEchoClient {
 
     public static void main(String[] args) throws IOException {
 
+        //如果参数不为2和3则抛异常
         if (((args.length < 2) || (args.length > 3))) {
             throw new IllegalArgumentException("Parameter(s):<Server> <Word> [<Port>]");
         }
         //服务器ip或域名
         String server = args[0];
+        //服务器端口
+        int serverPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7;
         //使用默认字符编码将参数String转为字节
         byte[] data = args[1].getBytes();
-        //确定回馈服务器的端口
-        int serverPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7;
+
         //创建套接字
         Socket socket = new Socket(server, serverPort);
         System.out.println("Connected to server...sending echo string");
