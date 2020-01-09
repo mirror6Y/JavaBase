@@ -8,14 +8,14 @@ import java.util.List;
  * @date 2019/12/5 18:45
  */
 public class Heap {
+
     static class OomObject {
 
     }
 
     public static void main(String[] args) {
-        List<OomObject> list = new ArrayList<OomObject>();
-        while (true)
-        {
+        List<OomObject> list = new ArrayList<>();
+        while (true) {
             list.add(new OomObject());
         }
     }
