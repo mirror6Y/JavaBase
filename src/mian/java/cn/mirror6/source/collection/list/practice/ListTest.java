@@ -1,4 +1,4 @@
-package cn.mirror6.source.collection.list;
+package cn.mirror6.source.collection.list.practice;
 
 
 import cn.mirror6.source.collection.list.linkedlist.LinkedList;

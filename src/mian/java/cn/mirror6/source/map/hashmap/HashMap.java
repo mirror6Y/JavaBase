@@ -218,7 +218,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * by either of the constructors with arguments.
      * MUST be a power of two <= 1<<30.
      */
-    static final int MAXIMUM_CAPACITY = 1 << 30;
+    public static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
      * The load factor used when none specified in constructor.
@@ -383,7 +383,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * Returns a power of two size for the given target capacity.
      */
-    static final int tableSizeFor(int cap) {
+    public static final int tableSizeFor(int cap) {
         int n = cap - 1;
         n |= n >>> 1;
         n |= n >>> 2;
@@ -1480,11 +1480,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     // These methods are also used when serializing HashSets
-    final float loadFactor() {
+    public final float loadFactor() {
         return loadFactor;
     }
 
-    final int capacity() {
+    public final int capacity() {
         return (table != null) ? table.length :
                 (threshold > 0) ? threshold :
                         DEFAULT_INITIAL_CAPACITY;
@@ -1683,11 +1683,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
     }
 
-    static final class KeySpliterator<K, V>
+    public static final class KeySpliterator<K, V>
             extends HashMapSpliterator<K, V>
             implements Spliterator<K> {
-        KeySpliterator(HashMap<K, V> m, int origin, int fence, int est,
-                       int expectedModCount) {
+        public KeySpliterator(HashMap<K, V> m, int origin, int fence, int est,
+                              int expectedModCount) {
             super(m, origin, fence, est, expectedModCount);
         }
 
