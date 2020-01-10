@@ -221,19 +221,12 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     public static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
-     * The load factor used when none specified in constructor.
-     * 在构造函数中未指定时使用的负载系数
+     * 默认负载系数(构造函数未指定)
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     /**
-     * The bin count threshold for using a tree rather than list for a
-     * bin.  Bins are converted to trees when adding an element to a
-     * bin with at least this many nodes. The value must be greater
-     * than 2 and should be at least 8 to mesh with assumptions in
-     * tree removal about conversion back to plain bins upon
-     * shrinkage.
-     * 阀值
+     * 链表转为树的阀值
      */
     static final int TREEIFY_THRESHOLD = 8;
 
@@ -260,11 +253,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
     static class Node<K, V> implements Map.Entry<K, V> {
 
-        //哈希值
+        //哈希值，用来定为数组索引位置
         final int hash;
-        //键值对的key
         final K key;
-        //键值对的value
         V value;
         //指向下一个节点的指针
         Node<K, V> next;
@@ -1145,7 +1136,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
 
         @Override
-        public final Spliterator<Map.Entry<K,V>> spliterator() {
+        public final Spliterator<Map.Entry<K, V>> spliterator() {
             return new EntrySpliterator<>(HashMap.this, 0, -1, 0, 0);
         }
 
