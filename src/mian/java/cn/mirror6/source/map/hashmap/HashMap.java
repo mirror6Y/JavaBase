@@ -207,8 +207,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
 
     /**
-     * 默认的初始容量-必须是2的幂数
-     * aka 16
+     * 默认的初始容量16-必须是2的幂数
      */
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
@@ -221,7 +220,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     public static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
-     * 默认负载系数(构造函数未指定)
+     * 默认负载系数
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
@@ -231,10 +230,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final int TREEIFY_THRESHOLD = 8;
 
     /**
-     * The bin count threshold for untreeifying a (split) bin during a
-     * resize operation. Should be less than TREEIFY_THRESHOLD, and at
-     * most 6 to mesh with shrinkage detection under removal.
-     * 取消阀值
+     * 树转为链表的阀值(小于6)
      */
     static final int UNTREEIFY_THRESHOLD = 6;
 
@@ -250,6 +246,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * Basic hash bin node, used for most entries.  (See below for
      * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
+     * 以哈希为基础的节点，用于大多数情况的键值对
      */
     static class Node<K, V> implements Map.Entry<K, V> {
 
@@ -391,6 +388,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * necessary. When allocated, length is always a power of two.
      * (We also tolerate length zero in some operations to allow
      * bootstrapping mechanics that are currently not needed.)
+     * 哈希桶数组
+     * 该表在首次使用时初始化，并根据需要调整大小。分配后，长度始终是2的幂。
      */
     transient Node<K, V>[] table;
 
@@ -401,21 +400,20 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     transient Set<Map.Entry<K, V>> entrySet;
 
     /**
-     * The number of key-value mappings contained in this map.
+     * HashMap中键值对的个数
      */
     transient int size;
 
     /**
-     * The number of times this HashMap has been structurally modified
-     * Structural modifications are those that change the number of mappings in
-     * the HashMap or otherwise modify its internal structure (e.g.,
-     * rehash).  This field is used to make iterators on Collection-views of
-     * the HashMap fail-fast.  (See ConcurrentModificationException).
+     * 记录HashMap内部结构发生变化的次数，主要用于迭代的快速失败
+     * 内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化
      */
     transient int modCount;
 
     /**
-     * The next size value at which to resize (capacity * load factor).
+     * HashMap所能容纳的最大数据量的Node(键值对)个数
+     * 超过这个数目就重新resize(扩容)
+     * threshold = length * Load factor
      *
      * @serial
      */
@@ -426,7 +424,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     int threshold;
 
     /**
-     * The load factor for the hash table.
+     * 负载因子
      *
      * @serial
      */
@@ -438,8 +436,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Constructs an empty <tt>HashMap</tt> with the specified initial
      * capacity and load factor.
      *
-     * @param initialCapacity the initial capacity
-     * @param loadFactor      the load factor
+     * @param initialCapacity 初始容量
+     * @param loadFactor      负载因子
      * @throws IllegalArgumentException if the initial capacity is negative
      *                                  or the load factor is nonpositive
      */
@@ -460,11 +458,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * Constructs an empty <tt>HashMap</tt> with the specified initial
-     * capacity and the default load factor (0.75).
+     * 构造一个空的HashMap
+     * 指定初始容量，默认负载因子
      *
-     * @param initialCapacity the initial capacity.
-     * @throws IllegalArgumentException if the initial capacity is negative.
+     * @param initialCapacity 初始容量
+     * @throws IllegalArgumentException 如果初始容量为负
      */
     public HashMap(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
