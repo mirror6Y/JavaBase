@@ -9,11 +9,12 @@
 
 ## 2.String 类的常用方法都有哪些？
 
-###查看长度
+查看长度
 
 public int length()	     返回此字符串的长度
 
-###转换功能
+转换功能
+
 public byte[] getBytes()	    把字符串转换为字节数组
 
 public char[] toCharArray()	把字符串转换为字符数组
@@ -28,18 +29,22 @@ public String toUpperCase()	把字符串转成大写
 
 public String concat(String str)	把字符串拼接
 
-###替换功能
+替换功能
+
 public String replace(char old, char new)	将指定字符进行互换
 
 public String replace(String old, String new)	将指定字符进行互换
 
-###去空格
+去空格
+
 public String trim()	去除两端空格
 
-###分割功能
+分割功能
+
 public String[] split(String regex)	分割字符串
 
-###比较功能
+比较功能
+
 public int compareTo(String str)	String的按字典顺序比较两个字符串
 
 public int compareToIgnoreCase(String str)	忽略大小写比较字符串
