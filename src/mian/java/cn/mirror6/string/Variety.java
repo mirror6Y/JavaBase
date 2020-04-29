@@ -15,5 +15,7 @@ public class Variety {
         s += "world";
         System.out.println(s);
         System.out.println("地址：" + System.identityHashCode(s));
+        final String var="1";
+        System.out.println(var);
     }
 }
