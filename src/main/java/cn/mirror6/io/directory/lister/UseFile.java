@@ -2,6 +2,7 @@ package cn.mirror6.io.directory.lister;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * @author mirror6
@@ -11,8 +12,16 @@ import java.util.Arrays;
 public class UseFile {
 
     public static void main(String[] args) {
-        File file = new File("D:\\AGit\\JavaBase\\src\\main\\java\\cn\\mirror6\\string");
-        String[] list = file.list();
+        String url = "F:\\Agithub\\JavaBase";
+        String regx = ".*md.*";
+        Pattern pattern = Pattern.compile(regx);
+        File file = new File(url);
+        String[] list;
+        if (args.length == 0) {
+            list = file.list();
+        } else {
+            list = file.list(new DirFilter(pattern));
+        }
         Arrays.sort(list, String.CASE_INSENSITIVE_ORDER);
         for (String dirItem : list) {
             System.out.println(dirItem);
