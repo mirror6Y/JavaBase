@@ -9,20 +9,18 @@ public class ThreadDemo extends Thread {
 
     @Override
     public void run() {
-
-        int count = 20;
-        for (; count > 0; count--) {
-            System.out.println(count);
+        for (int i = 2000; i > 0; i--) {
+            System.out.println("我在抢票" + i);
         }
     }
 
     public static void main(String[] args) {
         ThreadDemo threadDemo = new ThreadDemo();
         ThreadDemo threadDemo1 = new ThreadDemo();
-        threadDemo.run();
-        threadDemo1.run();
-        System.out.println("---");
         threadDemo.start();
         threadDemo1.start();
+        for (int i = 2000; i > 0; i--) {
+            System.out.println("抢" + i);
+        }
     }
 }
