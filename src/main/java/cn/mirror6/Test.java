@@ -5,7 +5,38 @@ package cn.mirror6;
  * @Author: mirror6
  * @Date: 2020/9/17 1:37
  */
-public class Test {
+public class Test extends Thread{
+
+    private long count = 0;
+
+    private void add10K() {
+        int idx = 0;
+        while (idx++ < 10000) {
+            count += 1;
+        }
+    }
+
+    @Override
+    public void run() {
+        int idx = 0;
+        while (idx++ < 10000) {
+            count += 1;
+        }
+    }
+
+    public long calc() throws InterruptedException {
+        final Test test = new Test();
+        // 创建两个线程，执行add()操作
+        Thread th1 = new Thread();
+        Thread th2 = new Thread();
+        //启动两个线程
+        th1.start();
+        th2.start();
+        //等待两个线程执行结束
+        th1.join();
+        th2.join();
+        return count;
+    }
 
     int res() {
         try {
@@ -32,9 +63,10 @@ public class Test {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Test test = new Test();
-        test.print();
+//        test.print();
+        System.out.println(test.calc());
 //        System.out.println(test.res());
     }
 }
